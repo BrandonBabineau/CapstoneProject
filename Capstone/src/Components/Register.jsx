@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-  const [Name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [error, setError] = useState();
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const handleEmailChange = (e) => {
@@ -25,12 +26,20 @@ const RegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Add registration here
+    // Check if any field is empty
+    if (!username || !email || !password || !confirmPassword) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-    console.log('Entered Username:', username);
-    console.log('Entered Email:', email);
-    console.log('Entered Password:', password);
-    console.log('Confirmed Password:', confirmPassword);
+    // Logs the entered information
+    console.log('Username:', username);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Confirm Password:', confirmPassword);
+
+    // Shows a popup alert
+    alert('New Account Registered!');
   };
 
   return (
@@ -58,6 +67,7 @@ const RegistrationForm = () => {
         </label>
         <br />
         <button type="submit">Register</button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
     </div>
   );

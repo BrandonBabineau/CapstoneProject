@@ -8,18 +8,25 @@ const NavBar = ({ isLoggedIn }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {isLoggedIn ? (
+        <li>
+          <Link to="/register">Registration</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+  
+        {isLoggedIn && (
           <>
             <li>
-              <Link to="/register">Registration</Link>
+              <Link to="/account">Account</Link>
             </li>
             <li>
-            </li>
+         <Link to="/inventory">Inventory</Link>
+        </li>
+        <li>
+         <Link to="/cart">Shopping Cart</Link>
+        </li>
           </>
-        ) : (
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
         )}
       </ul>
     </nav>

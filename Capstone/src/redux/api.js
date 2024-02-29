@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 export const apiSlice = createApi({
 
@@ -23,7 +23,7 @@ export const apiSlice = createApi({
     }),
     account: builder.query({
       query: (token) => ({
-        url: "/api/users",
+        url: "/api/users/1",
         headers: {
           authorization: `Bearer ${token}`,
         },

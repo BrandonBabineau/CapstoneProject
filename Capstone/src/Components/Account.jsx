@@ -1,46 +1,33 @@
 import { useState, useEffect } from 'react';
+import { useAccountQuery } from "../redux/api";
 
-const AccountDetails = ({ token }) => {
-  const [userData, setUserData] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Account (props) {
 
-  useEffect(() => {
-    const apiEndpoint = 'https://fakestoreapi.com/auth/login';
+  const { data, error, isLoading } = useAccountQuery(props.token);
 
-    if (token) {
-      fetch(apiEndpoint, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`, 
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        setUserData(data);
-        setIsLoggedIn(true);
-      })
-      .catch(error => console.error('Error fetching account details:', error));
-    }
-  }, [token]);
+  if (error || (!data?.user && !isLoading)) {
+    return <p>Something went wrong!</p>;
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      {isLoggedIn ? (
-        userData ? (
-          <div>
-            <h2>Account Details</h2>
-            <p>Name: {userData.name}</p>
-            <p>Email: {userData.email}</p>
-          </div>
+    <section>
+      <h2>Account</h2>
+      <ul>
+        <li>Username: {data.user.username} </li>
+        {data.user.email ? <li>Email: {data.user.email}</li> : ""}
+        {data.user.first_name ? (
+          <li>First Name: {data.user.first_name} </li>
         ) : (
-          <p>Loading account details...</p>
-        )
-      ) : (
-        <p>Please log in or create an account to view your details.</p>
-      )}
-    </div>
+          ""
+        )}
+        {data.user.last_name ? <li>Last Name: {data.user.last_name} </li> : ""}
+      </ul>
+    </section>
   );
-};
+}
 
-export default AccountDetails;
+export default Account;

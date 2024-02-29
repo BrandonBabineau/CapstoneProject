@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import Inventory from './Inventory'; // Import your Inventory component
 
 const LoginForm = () => {
+  const [showInventory, setShowInventory] = useState(false); // State to control showing inventory
+  const [error, setError] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -16,29 +18,14 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Assuming you have an authentication endpoint '/api/login'
-      const response = await fetch('https://fakestoreapi.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        // Handle authentication error
-        setError('Invalid username or password');
-        return;
-      }
-
-      // If authentication successful, redirect the user to another page or update authentication state
-      console.log('Authentication successful!');
-    } catch (error) {
-      console.error('Error during authentication:', error);
-      setError('An error occurred during authentication');
-    }
+    // Assuming no actual authentication needed, set showInventory to true directly
+    setShowInventory(true);
   };
+
+  // If showInventory is true, render Inventory component
+  if (showInventory) {
+    return <Inventory />;
+  }
 
   return (
     <div>
