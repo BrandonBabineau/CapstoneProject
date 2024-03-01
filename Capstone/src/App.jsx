@@ -1,28 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter as Router
+
 import Home from './Components/Home';
 import LoginForm from './Components/Login';
 import Account from './Components/Account';
 import RegistrationForm from './Components/Register';
-import Inventory from './Components/Inventory'
-import ShoppingCart from './Components/Cart'
+import Inventory from './Components/Inventory';
+import ShoppingCart from './Components/Cart';
 import NavBar from "./Components/Navbar";
 
 function App() {
+  const [token, setToken] = useState(null);
   return (
-    <Router>
-      <div>
-        <NavBar />
+    <div>
+      <Router> {/* Use Router here */}
+        <NavBar token={token} setToken={setToken} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/register" element={<RegistrationForm setToken={setToken} />} />
+          <Route path="/account" element={<Account setToken={setToken} />} />
+          <Route path="/inventory" element={<Inventory setToken={setToken} />} />
+          <Route path="/cart" element={<ShoppingCart setToken={setToken} />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 

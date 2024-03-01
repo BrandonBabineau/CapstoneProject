@@ -1,36 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-const NavBar = ({ isLoggedIn }) => {
+function NavBar(props) {
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    props.setToken(null);
+    navigate("/");
+  };
+
+  if (props.token) {
+    return (
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/account">Account</NavLink>
+          </li>
+          <li>
+            <NavLink to="/inventory">Inventory</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cart">Shopping Cart</NavLink>
+          </li>
+          <li>
+            <button onClick={logoutUser}>Logout</button>
+          </li>
+        </ul>
+      </nav>
+    );
+  } 
   return (
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <Link to="/register">Registration</Link>
+          <NavLink to="/register">Register</NavLink>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <NavLink to="/login">Login</NavLink>
         </li>
-  
-        {isLoggedIn && (
-          <>
-            <li>
-              <Link to="/account">Account</Link>
-            </li>
-            <li>
-         <Link to="/inventory">Inventory</Link>
-        </li>
-        <li>
-         <Link to="/cart">Shopping Cart</Link>
-        </li>
-          </>
-        )}
       </ul>
     </nav>
   );
-};
+}
 
 export default NavBar;

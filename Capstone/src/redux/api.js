@@ -23,7 +23,7 @@ export const apiSlice = createApi({
     }),
     account: builder.query({
       query: (token) => ({
-        url: "/api/users/1",
+        url: "/api/users",
         headers: {
           authorization: `Bearer ${token}`,
         },
