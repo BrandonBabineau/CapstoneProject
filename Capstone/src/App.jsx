@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import Home from './Components/Home';
 import LoginForm from './Components/Login';
 import Account from './Components/Account';
-import RegistrationForm from './Components/Register';
 import Inventory from './Components/Inventory';
 import ShoppingCart from './Components/Cart';
 import NavBar from "./Components/Navbar";
@@ -18,7 +17,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegistrationForm setToken={setToken} />} />
           <Route path="/account" element={<Account setToken={setToken} />} />
           <Route path="/inventory" element={<Inventory setToken={setToken} />} />
           <Route path="/cart" element={<ShoppingCart setToken={setToken} />} />
