@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Inventory({ handleCartUpdate }) {
+function Inventory() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -53,8 +53,6 @@ function Inventory({ handleCartUpdate }) {
   const addToCart = () => {
     // Check if any products are selected
     if (selectedProducts.length > 0) {
-      // Call the handleCartUpdate function to trigger the refetching of the cart data
-      handleCartUpdate();
       // Clear the selected products
       setSelectedProducts([]);
     }

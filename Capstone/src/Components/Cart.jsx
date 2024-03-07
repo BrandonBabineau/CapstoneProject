@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Inventory from './Inventory'
 
 function ShoppingCart() {
   const [cart, setCart] = useState(null);
@@ -26,10 +27,10 @@ function ShoppingCart() {
       <h1>Cart</h1>
       {cart ? (
         <div>
-          <h3>Cart ID: {cart.id}</h3>
-          <p>User ID: {cart.userId}</p>
-          <p>Date: {cart.date}</p>
-          {cart.products && cart.products.length > 0 ? ( // Check if products array exists and not empty
+          <h3>{cart.id}</h3>
+          <p>{cart.userId}</p>
+          <p>{cart.date}</p>
+          {cart.products && cart.products.length > 0 ? ( 
             <div>
               <h4>Products:</h4>
               <ul>
