@@ -1,8 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
-
-    reducerPath: "api",
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://fakestoreapi.com/",
   }),
@@ -21,19 +20,17 @@ export const apiSlice = createApi({
         body: loginUser,
       }),
     }),
-    account: builder.query({
-      query: (token) => ({
-        url: "/api/users",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+    cart: builder.query({
+      query: (userId) => ({
+        url: `/carts/user/${userId}`,
       }),
     }),
   }),
 });
 
+// Export the API slice and hooks
 export const {
   useRegisterMutation,
   useLoginMutation,
-  useAccountQuery,
+  useCartQuery,
 } = apiSlice;

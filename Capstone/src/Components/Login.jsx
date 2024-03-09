@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Inventory from './Inventory'; // Import your Inventory component
 
 const LoginForm = () => {
-  // Check if the user is already logged in
   const loggedInState = localStorage.getItem('loggedIn') === 'true';
 
-  // State variables
-  const [showInventory, setShowInventory] = useState(loggedInState); // State to control showing inventory
   const [error, setError] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(loggedInState); // State to track whether user is logged in
+  const [loggedIn, setLoggedIn] = useState(loggedInState); 
 
-  // Event handlers for input changes
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -38,10 +33,9 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data); // Log the response data
-        setShowInventory(true); // Show inventory if login is successful
-        setLoggedIn(true); // Set loggedIn state to true
-        localStorage.setItem('loggedIn', 'true'); // Store loggedIn state in localStorage
+        console.log(data); 
+        setLoggedIn(true); 
+        localStorage.setItem('loggedIn', 'true'); 
       } else {
         const errorData = await response.json();
         console.error('Login failed:', errorData); // Log error message
@@ -55,16 +49,34 @@ const LoginForm = () => {
 
   // Logout handler
   const handleLogout = () => {
-    localStorage.removeItem('loggedIn'); // Remove loggedIn state from localStorage
-    setShowInventory(false);
+    localStorage.removeItem('loggedIn'); 
     setLoggedIn(false);
+    // Show alert when user logs out
+    alert('You have been logged out.');
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (loggedIn) {
+        // Show alert when user logs out
+        event.preventDefault();
+        event.returnValue = ''; 
+        alert('You have been logged out.');
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [loggedIn]);
 
   return (
     <div>
       <h2>{loggedIn ? 'Welcome!' : 'Login'}</h2>
       {loggedIn && <button onClick={handleLogout}>Logout</button>} {/* Render logout button if user is logged in */}
-      {!showInventory && !loggedIn && ( // Render the login form only if showInventory is false and user is not logged in
+      {!loggedIn && ( // Render the login form only if user is not logged in
         <form onSubmit={handleSubmit}>
           <label>
             Username:
@@ -80,7 +92,6 @@ const LoginForm = () => {
           {error && <p>{error}</p>}
         </form>
       )}
-      {showInventory && <Inventory />} {/* Render the Inventory component if showInventory is true */}
     </div>
   );
 };

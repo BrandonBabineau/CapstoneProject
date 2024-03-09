@@ -51,12 +51,20 @@ function Inventory() {
 
   // Function to add selected products to cart
   const addToCart = () => {
+  
+    // state to add inventory via prop to cart // 
+
+    
     // Check if any products are selected
     if (selectedProducts.length > 0) {
       // Clear the selected products
       setSelectedProducts([]);
     }
   };
+
+
+
+
 
   return (
     <div>
