@@ -23,9 +23,6 @@ function NavBar(props) {
             <NavLink to="/cart">Shopping Cart</NavLink>
           </li>
           <li>
-            <NavLink to="/account">Account</NavLink>
-          </li>
-          <li>
             <button onClick={logoutUser}>Logout</button>
           </li>
         </ul>

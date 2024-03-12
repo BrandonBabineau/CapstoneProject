@@ -25,6 +25,12 @@ export const apiSlice = createApi({
         url: `/carts/user/${userId}`,
       }),
     }),
+    deleteCart: builder.mutation({
+      query: (cartId) => ({
+        url: `/carts/${cartId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -33,4 +39,5 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useCartQuery,
+  useDeleteCartMutation, 
 } = apiSlice;

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-function Inventory() {
+function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedProducts, setSelectedProducts] = useState([]); // State to track selected products
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
-    // Function to fetch all products
     const fetchProducts = async () => {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
@@ -16,21 +15,20 @@ function Inventory() {
         }
         const data = await response.json();
         setProducts(data);
-        setFilteredProducts(data); // Initialize filteredProducts with all products
+        setFilteredProducts(data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
 
     fetchProducts();
-  }, []); 
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     filterProducts(e.target.value);
   };
 
-  // Function to filter products based on search query
   const filterProducts = (query) => {
     const filtered = products.filter(product => {
       return product.title.toLowerCase().includes(query.toLowerCase());
@@ -38,37 +36,24 @@ function Inventory() {
     setFilteredProducts(filtered);
   };
 
-  // Function to handle checkbox change
   const handleCheckboxChange = (productId) => {
     if (selectedProducts.includes(productId)) {
-      // If the product is already selected, remove it
       setSelectedProducts(selectedProducts.filter(id => id !== productId));
     } else {
-      // If the product is not selected, add it
       setSelectedProducts([...selectedProducts, productId]);
     }
   };
 
-  // Function to add selected products to cart
-  const addToCart = () => {
-  
-    // state to add inventory via prop to cart // 
-
-    
-    // Check if any products are selected
-    if (selectedProducts.length > 0) {
-      // Clear the selected products
-      setSelectedProducts([]);
-    }
+  const handleAddToCart = () => {
+    const selectedProductsDetails = products.filter(product => selectedProducts.includes(product.id));
+    addToCart(selectedProductsDetails); // Pass selected products details to addToCart function
+    setSelectedProducts([]);
   };
-
-
-
-
 
   return (
     <div>
       <h1>Inventory</h1>
+      <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
       <input 
         type="text" 
         placeholder="Search products..." 
@@ -92,7 +77,7 @@ function Inventory() {
           </li>
         ))}
       </ul>
-      <button onClick={addToCart} disabled={selectedProducts.length === 0}>Add Selected to Cart</button>
+      <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
     </div>
   );
 }

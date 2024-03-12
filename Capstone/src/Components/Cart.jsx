@@ -1,37 +1,40 @@
-import React from 'react';
-import { useCartQuery } from "../redux/api";
+import React, { useState } from 'react';
 
-function ShoppingCart() {
-  const userId = 1; 
+function ShoppingCart({ cartProducts, removeSelectedFromCart }) {
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-  const { data: cart, error, isLoading } = useCartQuery(userId);
+  const handleCheckboxChange = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      setSelectedProducts(selectedProducts.filter(id => id !== productId));
+    } else {
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  };
+
+  const handleRemoveSelected = () => {
+    removeSelectedFromCart(selectedProducts);
+    setSelectedProducts([]);
+  };
 
   return (
     <div>
       <h1>Cart</h1>
-      {isLoading && <p>Loading cart...</p>}
-      {error && <p>Error fetching cart: {error.message}</p>}
-      {cart && (
-        <div>
-          <h3>{cart.id}</h3>
-          <p>{cart.userId}</p>
-          <p>{cart.date}</p>
-          {cart.products && cart.products.length > 0 ? ( 
-            <div>
-              <h4>Products:</h4>
-              <ul>
-                {cart.products.map(product => (
-                  <li key={product.productId}>
-                    <p>Product ID: {product.productId}, Quantity: {product.quantity}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <p>No products in the cart.</p>
-          )}
-        </div>
-      )}
+      <button onClick={handleRemoveSelected} disabled={selectedProducts.length === 0}>Remove Selected</button>
+      <ul>
+        {cartProducts.map(product => (
+          <li key={product.id}>
+            <input
+              type="checkbox"
+              checked={selectedProducts.includes(product.id)}
+              onChange={() => handleCheckboxChange(product.id)}
+            />
+            <h3>{product.title}</h3>
+            <p>Description: {product.description}</p>
+            <p>Price: ${product.price}</p>
+            <p>Quantity: {product.quantity}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
