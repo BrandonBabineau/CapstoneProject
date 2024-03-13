@@ -12,7 +12,7 @@ function NavBar(props) {
   if (props.token) {
     return (
       <nav>
-        <ul>
+        <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Apply inline style to remove bullets */}
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -31,7 +31,7 @@ function NavBar(props) {
   } else {
     return (
       <nav>
-        <ul>
+        <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Apply inline style to remove bullets */}
           <li>
             <NavLink to="/">Home</NavLink>
           </li>

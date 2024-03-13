@@ -5,6 +5,7 @@ function Inventory({ addToCart }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [sortBy, setSortBy] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -50,6 +51,21 @@ function Inventory({ addToCart }) {
     setSelectedProducts([]);
   };
 
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    sortProducts(e.target.value);
+  };
+
+  const sortProducts = (sortBy) => {
+    if (sortBy === 'lowToHigh') {
+      const sortedProducts = [...filteredProducts].sort((a, b) => a.price - b.price);
+      setFilteredProducts(sortedProducts);
+    } else if (sortBy === 'highToLow') {
+      const sortedProducts = [...filteredProducts].sort((a, b) => b.price - a.price);
+      setFilteredProducts(sortedProducts);
+    }
+  };
+
   return (
     <div>
       <h1>Inventory</h1>
@@ -60,7 +76,12 @@ function Inventory({ addToCart }) {
         value={searchQuery} 
         onChange={handleSearchChange} 
       />
-      <ul>
+      <select value={sortBy} onChange={handleSortChange}>
+        <option value="">Sort by</option>
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
+      </select>
+      <ul style={{ listStyleType: 'none' }}>
         {filteredProducts.map(product => (
           <li key={product.id}>
             <input
