@@ -31,6 +31,11 @@ export const apiSlice = createApi({
         method: "DELETE",
       }),
     }),
+    getProduct: builder.query({
+      query: (productId) => ({
+        url: `/products/${productId}`,
+      }),
+    }),
   }),
 });
 
@@ -39,5 +44,6 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useCartQuery,
-  useDeleteCartMutation, 
+  useDeleteCartMutation,
+  useGetProductQuery, 
 } = apiSlice;

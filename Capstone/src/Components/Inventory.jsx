@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useGetProductQuery } from '../redux/api'
 
 function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -91,9 +92,12 @@ function Inventory({ addToCart }) {
               onChange={() => handleCheckboxChange(product.id)}
             />
             <label htmlFor={`product_${product.id}`}>
+            <h4>{product.id}</h4>
               <h3>{product.title}</h3>
-              <p>{product.description}</p>
               <p>${product.price}</p>
+              <p>{product.category}</p>
+              <p>{product.description}</p>
+              <img src={product.image} alt={product.title} />
             </label>
           </li>
         ))}

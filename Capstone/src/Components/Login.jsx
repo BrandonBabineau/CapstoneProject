@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const loggedInState = localStorage.getItem('loggedIn') === 'true';
@@ -7,6 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(loggedInState); 
+  const navigate = useNavigate(); // Access the navigate function
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -36,6 +38,7 @@ const LoginForm = () => {
         console.log(data); 
         setLoggedIn(true); 
         localStorage.setItem('loggedIn', 'true'); 
+        navigate("/inventory"); // Navigate to inventory page
       } else {
         const errorData = await response.json();
         console.error('Login failed:', errorData); // Log error message
@@ -74,7 +77,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h2>{loggedIn ? 'Welcome!' : 'Login'}</h2>
+      <h2>{loggedIn ? '' : 'Login'}</h2>
       {loggedIn && <button onClick={handleLogout}>Logout</button>} {/* Render logout button if user is logged in */}
       {!loggedIn && ( // Render the login form only if user is not logged in
         <form onSubmit={handleSubmit}>

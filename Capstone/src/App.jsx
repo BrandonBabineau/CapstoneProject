@@ -21,7 +21,6 @@ function App() {
     }
   }, []);
 
-  // Update cartProducts in localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   }, [cartProducts]);
@@ -31,28 +30,39 @@ function App() {
   };
 
   const removeSelectedFromCart = (selectedProducts) => {
-    const updatedCart = cartProducts.filter(product => !selectedProducts.includes(product.id));
-    setCartProducts(updatedCart);
+    // Implement the logic to remove selected products from the cart
+    setCartProducts(prevCartProducts =>
+      prevCartProducts.filter(product => !selectedProducts.includes(product.id))
+    );
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    // Implement the logic to update the quantity of a product in the cart
+    setCartProducts(prevCartProducts =>
+      prevCartProducts.map(product =>
+        product.id === productId ? { ...product, quantity: quantity } : product
+      )
+    );
   };
 
   return (
     <div>
       <Provider store={store}>
         <Router>
-          <NavBar token={token} setToken={setToken} />
+          <NavBar token={token} setToken={setToken} /> {/* Pass token and setToken as props */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route 
-              path="/inventory" 
-              element={<Inventory addToCart={addToCart} />} 
-            />
-            <Route 
-              path="/cart" 
-              element={<ShoppingCart 
-                          cartProducts={cartProducts} 
-                          removeSelectedFromCart={removeSelectedFromCart} 
-                      />} 
+            <Route path="/login" element={<LoginForm setToken={setToken} />} /> {/* Pass setToken to LoginForm */}
+            <Route path="/inventory" element={<Inventory addToCart={addToCart} />} />
+            <Route
+              path="/cart"
+              element={
+                <ShoppingCart
+                  cartProducts={cartProducts}
+                  removeSelectedFromCart={removeSelectedFromCart}
+                  updateQuantity={updateQuantity}
+                />
+              }
             />
           </Routes>
         </Router>
