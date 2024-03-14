@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useGetProductQuery } from '../redux/api'
+import { useGetProductQuery } from '../redux/api';
 
 function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -48,7 +48,7 @@ function Inventory({ addToCart }) {
 
   const handleAddToCart = () => {
     const selectedProductsDetails = products.filter(product => selectedProducts.includes(product.id));
-    addToCart(selectedProductsDetails); // Pass selected products details to addToCart function
+    addToCart(selectedProductsDetails); 
     setSelectedProducts([]);
   };
 
@@ -63,6 +63,15 @@ function Inventory({ addToCart }) {
       setFilteredProducts(sortedProducts);
     } else if (sortBy === 'highToLow') {
       const sortedProducts = [...filteredProducts].sort((a, b) => b.price - a.price);
+      setFilteredProducts(sortedProducts);
+    } else if (sortBy === 'category') {
+      const sortedProducts = [...filteredProducts].sort((a, b) => a.category.localeCompare(b.category));
+      setFilteredProducts(sortedProducts);
+    } else if (sortBy === 'ascendingID') {
+      const sortedProducts = [...filteredProducts].sort((a, b) => a.id - b.id);
+      setFilteredProducts(sortedProducts);
+    } else if (sortBy === 'descendingID') {
+      const sortedProducts = [...filteredProducts].sort((a, b) => b.id - a.id);
       setFilteredProducts(sortedProducts);
     }
   };
@@ -81,6 +90,9 @@ function Inventory({ addToCart }) {
         <option value="">Sort by</option>
         <option value="lowToHigh">Price: Low to High</option>
         <option value="highToLow">Price: High to Low</option>
+        <option value="category">Category</option>
+        <option value="ascendingID">ID: Ascending</option>
+        <option value="descendingID">ID: Descending</option>
       </select>
       <ul style={{ listStyleType: 'none' }}>
         {filteredProducts.map(product => (
@@ -92,7 +104,7 @@ function Inventory({ addToCart }) {
               onChange={() => handleCheckboxChange(product.id)}
             />
             <label htmlFor={`product_${product.id}`}>
-            <h4>{product.id}</h4>
+              <h4>{product.id}</h4>
               <h3>{product.title}</h3>
               <p>${product.price}</p>
               <p>{product.category}</p>

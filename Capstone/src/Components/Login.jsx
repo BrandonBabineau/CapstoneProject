@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(loggedInState); 
-  const navigate = useNavigate(); // Access the navigate function
+  const navigate = useNavigate(); 
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
