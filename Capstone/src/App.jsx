@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from "react-redux";
-import store from "./redux/store";
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import ProductDetail from './Components/singleProductInventory'; // Import ProductDetail component
 import Home from './Components/Home';
 import LoginForm from './Components/Login';
 import Inventory from './Components/Inventory';
 import ShoppingCart from './Components/Cart';
-import NavBar from "./Components/Navbar";
+import NavBar from './Components/Navbar';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -30,14 +30,12 @@ function App() {
   };
 
   const removeSelectedFromCart = (selectedProducts) => {
-    // Implement the logic to remove selected products from the cart
     setCartProducts(prevCartProducts =>
       prevCartProducts.filter(product => !selectedProducts.includes(product.id))
     );
   };
 
   const updateQuantity = (productId, quantity) => {
-    // Implement the logic to update the quantity of a product in the cart
     setCartProducts(prevCartProducts =>
       prevCartProducts.map(product =>
         product.id === productId ? { ...product, quantity: quantity } : product
@@ -49,11 +47,13 @@ function App() {
     <div>
       <Provider store={store}>
         <Router>
-          <NavBar token={token} setToken={setToken} /> {/* Pass token and setToken as props */}
+          <NavBar token={token} setToken={setToken} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm setToken={setToken} />} /> {/* Pass setToken to LoginForm */}
+            <Route path="/login" element={<LoginForm setToken={setToken} />} />
             <Route path="/inventory" element={<Inventory addToCart={addToCart} />} />
+            {/* Route for ProductDetail component */}
+            <Route path="/product/:productId" element={<ProductDetail />} />
             <Route
               path="/cart"
               element={

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGetProductQuery } from '../redux/api';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -111,6 +112,10 @@ function Inventory({ addToCart }) {
               <p>{product.description}</p>
               <img src={product.image} alt={product.title} />
             </label>
+            {/* View Details button */}
+            <Link to={`/product/${product.id}`}>
+              <button>View Details</button>
+            </Link>
           </li>
         ))}
       </ul>
