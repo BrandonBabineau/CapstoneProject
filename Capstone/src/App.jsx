@@ -8,12 +8,12 @@ import LoginForm from './Components/Login';
 import Inventory from './Components/Inventory';
 import ShoppingCart from './Components/Cart';
 import NavBar from './Components/Navbar';
+import './Components/CSS/navbar.css'
 
 function App() {
   const [token, setToken] = useState(null);
   const [cartProducts, setCartProducts] = useState([]);
 
-  // Load cart data from localStorage on initial render
   useEffect(() => {
     const savedCart = localStorage.getItem('cartProducts');
     if (savedCart) {
@@ -52,7 +52,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm setToken={setToken} />} />
             <Route path="/inventory" element={<Inventory addToCart={addToCart} />} />
-            {/* Route for ProductDetail component */}
+            {}
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route
               path="/cart"

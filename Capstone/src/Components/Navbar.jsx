@@ -9,10 +9,12 @@ function NavBar(props) {
     navigate("/");
   };
 
-  if (props.token) {
-    return (
-      <nav>
-        <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Apply inline style to remove bullets */}
+  return (
+    <div>
+      <nav className="nav">
+        <input id="menu" type="checkbox" />
+        <label htmlFor="menu">Menu</label>
+        <ul className="menu">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -22,32 +24,19 @@ function NavBar(props) {
           <li>
             <NavLink to="/cart">Shopping Cart</NavLink>
           </li>
-          <li>
-            <button onClick={logoutUser}>Logout</button>
-          </li>
+          {props.token ? (
+            <li>
+              <button onClick={logoutUser}>Logout</button>
+            </li>
+          ) : (
+            <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+          )}
         </ul>
       </nav>
-    );
-  } else {
-    return (
-      <nav>
-        <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Apply inline style to remove bullets */}
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/inventory">Inventory</NavLink>
-          </li>
-          <li>
-            <NavLink to="/cart">Shopping Cart</NavLink>
-          </li>
-        </ul>
-      </nav>
-    );
-  }
+    </div>
+  );
 }
 
 export default NavBar;
