@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useGetProductQuery } from '../redux/api';
-import { Link } from 'react-router-dom'; 
-import './CSS/inventory.css'
+import './CSS/inventory.css';
 
 function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -50,7 +50,7 @@ function Inventory({ addToCart }) {
 
   const handleAddToCart = () => {
     const selectedProductsDetails = products.filter(product => selectedProducts.includes(product.id));
-    addToCart(selectedProductsDetails); 
+    addToCart(selectedProductsDetails);
     setSelectedProducts([]);
   };
 
@@ -82,11 +82,11 @@ function Inventory({ addToCart }) {
     <div>
       <h1>Inventory</h1>
       <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
-      <input 
-        type="text" 
-        placeholder="Search products..." 
-        value={searchQuery} 
-        onChange={handleSearchChange} 
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={searchQuery}
+        onChange={handleSearchChange}
       />
       <select value={sortBy} onChange={handleSortChange}>
         <option value="">Sort by</option>
@@ -112,9 +112,11 @@ function Inventory({ addToCart }) {
               <p>{product.category}</p>
               <img src={product.image} alt={product.title} />
             </label>
-            <Link to={`/product/${product.id}`}>
-              <button>View Details</button>
-            </Link>
+            <div className="view-details-button">
+              <Link to={`/product/${product.id}`}>
+                <button>View More Details</button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

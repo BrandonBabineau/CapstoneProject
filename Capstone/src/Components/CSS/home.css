@@ -1,0 +1,15 @@
+.main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* 100% of viewport width */
+    height: 100vh; /* 100% of viewport height */
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+    z-index: -1; /* Ensure the image is behind other content */
+  }
+  h1 {
+    color: white;
+    font-weight: 200;
+    font-size: 70px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  }
