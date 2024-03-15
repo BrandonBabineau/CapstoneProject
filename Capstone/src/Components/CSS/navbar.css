@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
 :root {
   --white: #638564;
   --light-grey: #edf0f1;
@@ -7,17 +5,14 @@
   --dark-violet: #5146e1;
   --black: #21232a;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 ul {
   list-style: none;
 }
-
 a {
   color: inherit;
   text-decoration: none;
@@ -38,14 +33,11 @@ body {
   padding: 10px;
   background: var(--violet);
 }
-
-/* MAIN STYLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .nav {
   position: relative;
   display: flex;
   justify-content: center;
-  max-width: 400px;
+  max-width: 800px;
   padding-bottom: 1%;
   border-radius: 20px 20px 20px 20px;
   margin: 300px auto 0;
@@ -61,8 +53,8 @@ body {
 
 .nav [type="checkbox"] + label {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,7 +152,15 @@ body {
   transition-delay: 0.9s;
 }
   .menu li a {
-    width: 80px;
-    height: 80px; 
+    width: 70px;
+    height: 70px; 
     border-radius: 80%;
+  }
+  .menu li a {
+    width: 70px;
+    height: 70px; 
+    border-radius: 80%;
+  }
+  .menu li a:hover {
+    background: rgb(79, 169, 79);
   }

@@ -1,0 +1,21 @@
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text within the container */
+  }
+  
+  .product-details h2,
+  .product-details p {
+    color: black;
+  }
+  
+  .product-details .price {
+    color: rgb(12, 20, 246);
+  }
+  
+  .product-image img {
+    max-width: 200px;
+    height: auto;
+  }
+  

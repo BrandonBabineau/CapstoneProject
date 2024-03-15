@@ -10,8 +10,8 @@
   }
   
   .product-card img {
-    width: 80%; 
-    height: auto; 
+    width: 60%; 
+    height: auto;
   }
   
   .product-card h4,
@@ -19,4 +19,5 @@
   .product-card p {
     color: black; 
   }
+  
   

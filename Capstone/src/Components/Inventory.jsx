@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGetProductQuery } from '../redux/api';
 import { Link } from 'react-router-dom'; 
+import './CSS/inventory.css'
 
 function Inventory({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -95,9 +96,9 @@ function Inventory({ addToCart }) {
         <option value="ascendingID">ID: Ascending</option>
         <option value="descendingID">ID: Descending</option>
       </select>
-      <ul style={{ listStyleType: 'none' }}>
+      <div className="inventory-container">
         {filteredProducts.map(product => (
-          <li key={product.id}>
+          <div className="product-card" key={product.id}>
             <input
               type="checkbox"
               id={`product_${product.id}`}
@@ -109,15 +110,14 @@ function Inventory({ addToCart }) {
               <h3>{product.title}</h3>
               <p>${product.price}</p>
               <p>{product.category}</p>
-              <p>{product.description}</p>
               <img src={product.image} alt={product.title} />
-            </label>{}
+            </label>
             <Link to={`/product/${product.id}`}>
               <button>View Details</button>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
       <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
     </div>
   );
