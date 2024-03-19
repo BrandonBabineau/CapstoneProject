@@ -40,7 +40,7 @@ function ShoppingCart({ cartProducts, removeSelectedFromCart, updateQuantity }) 
   };
 
   // Calculate total price
-  const totalPrice = cartProducts.reduce((acc, product) => acc + (product.price * (updatedQuantity[product.id] || product.quantity || 1)), 0);
+  const totalPrice = cartProducts ? cartProducts.reduce((acc, product) => acc + (product.price * (updatedQuantity[product.id] || product.quantity || 1)), 0) : 0;
 
   return (
     <div className="cart-container">
@@ -55,7 +55,7 @@ function ShoppingCart({ cartProducts, removeSelectedFromCart, updateQuantity }) 
               onChange={() => handleCheckboxChange(product.id)}
             />
             <h3>{product.title}</h3>
-            <p>Price: ${product.price}</p>
+            <p>${product.price.toFixed(2)}</p> {}
             <img src={product.image} alt={product.title} />
             <p>
               Quantity:

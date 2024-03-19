@@ -17,7 +17,7 @@ function ProductDetail() {
       </Link>
       <h2>{product.title}</h2>
       <p>{product.description}</p>
-      <p className="price">Price: ${product.price}</p>
+      <p>${product.price.toFixed(2)}</p> {}
       <div className="product-image">
         <img src={product.image} alt={product.title} />
       </div>

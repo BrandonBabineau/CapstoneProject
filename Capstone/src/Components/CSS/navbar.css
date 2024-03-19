@@ -1,9 +1,9 @@
 :root {
-  --white: #d620c798;
-  --light-grey: #edf0f1;
-  --violet: #060606;
-  --dark-violet: #5146e1;
-  --black: #21232a;
+  --white: #9f31b398;
+  --light-grey: #bd94cb;
+  --violet: #847c7c;
+  --dark-violet: #99989a;
+  --black: #3a3c43;
 }
 * {
   margin: 0;
@@ -162,5 +162,5 @@ body {
     border-radius: 80%;
   }
   .menu li a:hover {
-    background: rgb(79, 169, 79);
+    background: rgb(209, 21, 46);
   }

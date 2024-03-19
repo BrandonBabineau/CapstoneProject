@@ -52,7 +52,9 @@ function Inventory({ addToCart }) {
     const selectedProductsDetails = products.filter(product => selectedProducts.includes(product.id));
     addToCart(selectedProductsDetails);
     setSelectedProducts([]);
+    window.alert('Item Added to Cart'); // Alert immediately after adding the item to the cart
   };
+  
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
@@ -108,7 +110,7 @@ function Inventory({ addToCart }) {
             <label htmlFor={`product_${product.id}`}>
               <h4>{product.id}</h4>
               <h3>{product.title}</h3>
-              <p>${product.price}</p>
+              <p>${product.price.toFixed(2)}</p> {}
               <p>{product.category}</p>
               <img src={product.image} alt={product.title} />
             </label>

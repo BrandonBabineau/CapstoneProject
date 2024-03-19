@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Home from './Home';
+import './CSS/home.css'; 
 
 describe('Home', () => {
   it('renders the home page', () => {
