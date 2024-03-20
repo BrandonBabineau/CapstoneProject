@@ -8,7 +8,7 @@ function NavBar(props) {
     props.setToken(null);
     navigate("/");
   };
-
+console.log (props.token, props); 
   return (
     <div>
       <nav className="nav">
@@ -22,17 +22,11 @@ function NavBar(props) {
             <NavLink to="/inventory">Inventory</NavLink>
           </li>
           <li>
-            <NavLink to="/cart">Shopping Cart</NavLink>
+            {props.token && <NavLink  to="/cart">Shopping Cart</NavLink>}
           </li>
-          {props.token ? (
-            <li>
-              <button onClick={logoutUser}>Logout</button>
+          <li>
+              <NavLink onClick={logoutUser} to="/login">{props.token ? "Logout": "Login"}</NavLink>
             </li>
-          ) : (
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
-          )}
         </ul>
       </nav>
     </div>

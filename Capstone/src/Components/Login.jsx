@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const loggedInState = localStorage.getItem('loggedIn') === 'true';
 
   const [error, setError] = useState(null);
@@ -35,7 +35,10 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data); 
+        console.log(data);
+
+        props.setToken(data.token); // setting prop
+
         setLoggedIn(true); 
         localStorage.setItem('loggedIn', 'true'); 
         navigate("/inventory"); // Navigate to inventory page

@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { useGetProductQuery } from '../redux/api';
 import './CSS/inventory.css';
 
-function Inventory({ addToCart }) {
+/// update add to cart to not see unless logged in 
+
+function Inventory({ addToCart, token }) {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -83,7 +85,7 @@ function Inventory({ addToCart }) {
   return (
     <div>
       <h1>Inventory</h1>
-      <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
+      {token && <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>}
       <input
         type="text"
         placeholder="Search products..."
@@ -122,7 +124,7 @@ function Inventory({ addToCart }) {
           </div>
         ))}
       </div>
-      <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>
+      {token && <button onClick={handleAddToCart} disabled={selectedProducts.length === 0}>Add to Cart</button>}
     </div>
   );
 }
