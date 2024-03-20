@@ -16,4 +16,6 @@
     max-width: 200px;
     height: auto;
   }
-  
+  .product-card p.price {
+    color: blue;
+  }

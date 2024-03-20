@@ -9,6 +9,7 @@ function NavBar(props) {
     navigate("/");
   };
 console.log (props.token, props); 
+
   return (
     <div>
       <nav className="nav">

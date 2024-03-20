@@ -1,21 +1,25 @@
 .inventory-container {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-  }
-  
-  .product-card {
-    width: calc(33.33% - 20px); 
-    margin-bottom: 20px; 
-  }
-  
-  .product-card img {
-    width: 80%; 
-    height: auto; 
-  }
-  
-  .product-card h4,
-  .product-card h3,
-  .product-card p {
-    color: black; 
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-card {
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+}
+
+.product-card img {
+  width: 80%;
+  height: auto;
+}
+
+.product-card h4,
+.product-card h3,
+.product-card p {
+  color: black;
+}
+
+.product-card p.price {
+  color: blue;
+}

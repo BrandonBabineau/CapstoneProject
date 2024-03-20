@@ -3,8 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useGetProductQuery } from '../redux/api';
 import './CSS/inventory.css';
 
-/// update add to cart to not see unless logged in 
-
 function Inventory({ addToCart, token }) {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -112,7 +110,7 @@ function Inventory({ addToCart, token }) {
             <label htmlFor={`product_${product.id}`}>
               <h4>{product.id}</h4>
               <h3>{product.title}</h3>
-              <p>${product.price.toFixed(2)}</p> {}
+              <p className="price">${product.price.toFixed(2)}</p>{}
               <p>{product.category}</p>
               <img src={product.image} alt={product.title} />
             </label>
