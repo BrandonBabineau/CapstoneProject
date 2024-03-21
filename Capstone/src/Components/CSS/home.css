@@ -47,7 +47,6 @@
     z-index: -1;
   }
   
-  /* Decorative styles */
   body {
     display: grid;
     place-items: center;

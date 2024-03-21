@@ -108,7 +108,6 @@ function Inventory({ addToCart, token }) {
               onChange={() => handleCheckboxChange(product.id)}
             />
             <label htmlFor={`product_${product.id}`}>
-              <h4>{product.id}</h4>
               <h3>{product.title}</h3>
               <p className="price">${product.price.toFixed(2)}</p>{}
               <p>{product.category}</p>

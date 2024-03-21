@@ -24,7 +24,7 @@ function ShoppingCart({ cartProducts, removeSelectedFromCart, updateQuantity }) 
   };
 
   const handleUpdateQuantity = () => {
-    // Update quantities for selected products
+    // Update quantities for products
     Object.keys(updatedQuantity).forEach(productId => {
       updateQuantity(productId, updatedQuantity[productId]);
     });
@@ -33,10 +33,12 @@ function ShoppingCart({ cartProducts, removeSelectedFromCart, updateQuantity }) 
   };
 
   const handleCheckout = () => {
-    // alert message for successful checkout
+    // Remove all products from the cart
+    removeSelectedFromCart(cartProducts.map(product => product.id));
+    setSelectedProducts([]);
+    // alert message for checkout
     window.alert('Checkout successful!');
     // redirect to the inventory page
-    window.location.href = '/inventory';
   };
 
   // Calculate total price

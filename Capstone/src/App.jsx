@@ -58,7 +58,7 @@ function App() {
                 <ShoppingCart
                   cartProducts={cartProducts}
                   removeSelectedFromCart={removeSelectedFromCart}
-                  updateQuantity={updateQuantity}
+                  updateQuantity={updateQuantity} token = {token} 
                 />
               }
             />
