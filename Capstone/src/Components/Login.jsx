@@ -81,6 +81,8 @@ const LoginForm = (props) => {
   return (
     <div>
       <h2>{loggedIn ? '' : 'Login'}</h2>
+      <img className="main" src="https://media.istockphoto.com/id/1294996142/photo/front-view-of-mock-up-laptop-computer-with-blank-screen-notebook-stationery-coffee-cup-and.jpg?s=2048x2048&w=is&k=20&c=BTnM4S7QDLodSstkAfzOUNLwaBJKVLab7qj9CiTmk7k=" />
+
       {loggedIn && <button onClick={handleLogout}>Logout</button>} {/* Render logout button if user is logged in */}
       {!loggedIn && ( // Render the login form only if user is not logged in
         <form onSubmit={handleSubmit}>
